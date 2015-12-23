@@ -13,6 +13,13 @@ def get_tiles(d):
         if (regex.match(f)):
             yield f
 
+def get_sheets(d):
+    lst = listdir(d)
+    regex = re.compile("sheet_\d+.png")
+    for f in lst:
+        if (regex.match(f)):
+            yield f
+
 def gen_names():
     json_obj = {}
     for tile in get_tiles():
@@ -101,6 +108,11 @@ def main():
     sheets = pack_into_lists(counts, width, height)
     sheet_images = generate_sprite_sheets(sheets, pil_images, width, height, side_length)
 
+    guide = Image.open("./guide_transparency.png")
+
     for sheet_index, sheet_image in enumerate(sheet_images):
         filename = "sheets/sheet_{0}.png".format(sheet_index)
+        guided_filename = "sheets/guided_sheet_{0}.png".format(sheet_index)
         sheet_image.save(filename)
+        guide.paste(sheet_image, (6, 32))
+        guide.save(guided_filename)
