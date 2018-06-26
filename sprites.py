@@ -111,8 +111,8 @@ def main():
     guide = Image.open("./guide_transparency.png")
 
     for sheet_index, sheet_image in enumerate(sheet_images):
-        filename = "sheets/sheet_{0}.png".format(sheet_index)
-        guided_filename = "sheets/guided_sheet_{0}.png".format(sheet_index)
+        filename = "output/sheet_{0}.png".format(sheet_index)
+        guided_filename = "output/guided_sheet_{0}.png".format(sheet_index)
         sheet_image.save(filename)
         guide.paste(sheet_image, (6, 32))
         guide.save(guided_filename)
